@@ -67,11 +67,15 @@ class NeumorphicThemeData {
 
   /// Default text theme to use and apply across the app
   final TextTheme textTheme;
+
   /// Default button style to use and apply across the app
   final NeumorphicStyle buttonStyle;
+
   /// Default icon theme to use and apply across the app
   final IconThemeData iconTheme;
   final NeumorphicAppBarThemeData appBarTheme;
+
+  final String fontFamily;
 
   /// Get this theme's depth, clamp to min/max neumorphic constants
   double get depth => _depth?.clamp(Neumorphic.MIN_DEPTH, Neumorphic.MAX_DEPTH);
@@ -101,6 +105,7 @@ class NeumorphicThemeData {
     this.borderColor = NeumorphicColors.defaultBorder,
     this.borderWidth = _defaultBorderSize,
     this.disableDepth = false,
+    this.fontFamily,
   })  : this._depth = depth,
         this._boxShape = boxShape,
         this._intensity = intensity;
@@ -126,6 +131,7 @@ class NeumorphicThemeData {
     this.borderColor = NeumorphicColors.darkDefaultBorder,
     this.borderWidth = _defaultBorderSize,
     this.disableDepth = false,
+    this.fontFamily,
   })  : this._depth = depth,
         this._boxShape = boxShape,
         this._intensity = intensity;
@@ -159,6 +165,7 @@ class NeumorphicThemeData {
           borderColor == other.borderColor &&
           _depth == other._depth &&
           _intensity == other._intensity &&
+          fontFamily == other.fontFamily &&
           lightSource == other.lightSource;
 
   @override
@@ -182,6 +189,7 @@ class NeumorphicThemeData {
       _depth.hashCode ^
       boxShape.hashCode ^
       _intensity.hashCode ^
+      fontFamily.hashCode ^
       lightSource.hashCode;
 
   /// Create a copy of this theme
@@ -208,6 +216,7 @@ class NeumorphicThemeData {
     Color borderColor,
     double borderSize,
     LightSource lightSource,
+    String fontFamily,
   }) {
     return new NeumorphicThemeData(
       baseColor: baseColor ?? this.baseColor,
@@ -232,6 +241,7 @@ class NeumorphicThemeData {
       borderColor: borderColor ?? this.borderColor,
       intensity: intensity ?? this._intensity,
       lightSource: lightSource ?? this.lightSource,
+      fontFamily: fontFamily ?? this.fontFamily,
     );
   }
 
@@ -263,6 +273,7 @@ class NeumorphicThemeData {
       borderWidth: other.borderWidth ?? this.borderWidth,
       intensity: other.intensity ?? this._intensity,
       lightSource: other.lightSource ?? this.lightSource,
+      fontFamily: other.fontFamily ?? this.fontFamily,
     );
   }
 }
