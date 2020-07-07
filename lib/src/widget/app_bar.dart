@@ -70,6 +70,8 @@ class NeumorphicAppBar extends StatefulWidget implements PreferredSizeWidget {
   /// Force color of the icon inside app bar
   final IconThemeData iconTheme;
 
+  final bool clipActions;
+
   @override
   final Size preferredSize;
 
@@ -93,6 +95,7 @@ class NeumorphicAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.centerTitle,
     this.titleSpacing = NavigationToolbar.kMiddleSpacing,
     this.actionSpacing = defaultSpacing,
+    this.clipActions = true,
   })  : preferredSize = Size.fromHeight(toolbarHeight),
         super(key: key);
 
@@ -194,14 +197,18 @@ class NeumorphicAppBarState extends State<NeumorphicAppBar> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: widget.actions
-            .map((child) => Padding(
-                  padding: EdgeInsets.only(left: widget.actionSpacing),
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints.tightFor(
-                        width: kToolbarHeight, height: kToolbarHeight),
-                    child: child,
-                  ),
-                ))
+            .map(
+              (child) => Padding(
+                padding: EdgeInsets.only(left: widget.actionSpacing),
+                child: widget.clipActions
+                    ? ConstrainedBox(
+                        constraints: const BoxConstraints.tightFor(
+                            width: kToolbarHeight, height: kToolbarHeight),
+                        child: child,
+                      )
+                    : child,
+              ),
+            )
             .toList(growable: false),
       );
     } else if (hasEndDrawer) {
@@ -227,7 +234,8 @@ class NeumorphicAppBarState extends State<NeumorphicAppBar> {
             child: IconTheme(
               data: widget.iconTheme ??
                   nTheme.current.appBarTheme.iconTheme ??
-                  nTheme.current.iconTheme ?? const IconThemeData(),
+                  nTheme.current.iconTheme ??
+                  const IconThemeData(),
               child: NavigationToolbar(
                 leading: leading,
                 middle: title,
