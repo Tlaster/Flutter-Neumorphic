@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -253,14 +254,18 @@ class NeumorphicToggle extends StatelessWidget {
       );
     }
     return Expanded(
-        flex: 1,
+      flex: 1,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () {
             _notifyOnChange(index);
           },
           child: child,
-        ));
+        ),
+      ),
+    );
   }
 
   Widget _background(BuildContext context) {

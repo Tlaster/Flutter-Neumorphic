@@ -1,3 +1,4 @@
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/src/widget/animation/animated_scale.dart';
 
@@ -142,40 +143,45 @@ class NeumorphicSwitch extends StatelessWidget {
       height: this.height,
       child: AspectRatio(
         aspectRatio: 2 / 1,
-        child: GestureDetector(
-          onTap: () {
-            // animation breaking prevention
-            if (!this.isEnabled) {
-              return;
-            }
-            if (this.onChanged != null) {
-              this.onChanged(!this.value);
-            }
-          },
-          child: Neumorphic(
-            drawSurfaceAboveChild: false,
-            style: NeumorphicStyle(
-              boxShape: NeumorphicBoxShape.stadium(),
-              lightSource: this.style.lightSource ?? theme.lightSource,
-              border: this.style.trackBorder,
-              disableDepth: this.style.disableDepth,
-              depth: _getTrackDepth(theme.depth),
-              shape: NeumorphicShape.flat,
-              color: _getTrackColor(theme, this.isEnabled),
-            ),
-            child: AnimatedScale(
-              scale: this.isEnabled ? 1 : 0,
-              alignment: this.value ? Alignment(0.5, 0) : Alignment(-0.5, 0),
-              child: AnimatedThumb(
-                curve: this.curve,
-                disableDepth: this.style.disableDepth,
-                depth: this._thumbDepth,
-                duration: this.duration,
-                alignment: this._alignment,
-                shape: _getThumbShape,
+        child: MouseRegion(
+          cursor: this.isEnabled
+              ? SystemMouseCursors.click
+              : SystemMouseCursors.basic,
+          child: GestureDetector(
+            onTap: () {
+              // animation breaking prevention
+              if (!this.isEnabled) {
+                return;
+              }
+              if (this.onChanged != null) {
+                this.onChanged(!this.value);
+              }
+            },
+            child: Neumorphic(
+              drawSurfaceAboveChild: false,
+              style: NeumorphicStyle(
+                boxShape: NeumorphicBoxShape.stadium(),
                 lightSource: this.style.lightSource ?? theme.lightSource,
-                border: style.thumbBorder,
-                thumbColor: _getThumbColor(theme),
+                border: this.style.trackBorder,
+                disableDepth: this.style.disableDepth,
+                depth: _getTrackDepth(theme.depth),
+                shape: NeumorphicShape.flat,
+                color: _getTrackColor(theme, this.isEnabled),
+              ),
+              child: AnimatedScale(
+                scale: this.isEnabled ? 1 : 0,
+                alignment: this.value ? Alignment(0.5, 0) : Alignment(-0.5, 0),
+                child: AnimatedThumb(
+                  curve: this.curve,
+                  disableDepth: this.style.disableDepth,
+                  depth: this._thumbDepth,
+                  duration: this.duration,
+                  alignment: this._alignment,
+                  shape: _getThumbShape,
+                  lightSource: this.style.lightSource ?? theme.lightSource,
+                  border: style.thumbBorder,
+                  thumbColor: _getThumbColor(theme),
+                ),
               ),
             ),
           ),

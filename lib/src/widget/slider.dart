@@ -1,3 +1,5 @@
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -136,30 +138,33 @@ class _NeumorphicSliderState extends State<NeumorphicSlider> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      return GestureDetector(
-        onPanUpdate: (DragUpdateDetails details) {
-          final RenderBox box = context.findRenderObject();
-          final tapPos = box.globalToLocal(details.globalPosition);
-          final newPercent = tapPos.dx / constraints.maxWidth;
-          final newValue =
-              ((widget.min + (widget.max - widget.min) * newPercent))
-                  .clamp(widget.min, widget.max);
+      return MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onPanUpdate: (DragUpdateDetails details) {
+            final RenderBox box = context.findRenderObject();
+            final tapPos = box.globalToLocal(details.globalPosition);
+            final newPercent = tapPos.dx / constraints.maxWidth;
+            final newValue =
+                ((widget.min + (widget.max - widget.min) * newPercent))
+                    .clamp(widget.min, widget.max);
 
-          if (widget.onChanged != null) {
-            widget.onChanged(newValue);
-          }
-        },
-        onPanStart: (DragStartDetails details) {
-          if (widget.onChangeStart != null) {
-            widget.onChangeStart(widget.value);
-          }
-        },
-        onPanEnd: (details) {
-          if (widget.onChangeEnd != null) {
-            widget.onChangeEnd(widget.value);
-          }
-        },
-        child: _widget(context),
+            if (widget.onChanged != null) {
+              widget.onChanged(newValue);
+            }
+          },
+          onPanStart: (DragStartDetails details) {
+            if (widget.onChangeStart != null) {
+              widget.onChangeStart(widget.value);
+            }
+          },
+          onPanEnd: (details) {
+            if (widget.onChangeEnd != null) {
+              widget.onChangeEnd(widget.value);
+            }
+          },
+          child: _widget(context),
+        ),
       );
     });
   }

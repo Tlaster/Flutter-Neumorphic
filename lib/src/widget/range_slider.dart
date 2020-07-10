@@ -205,7 +205,9 @@ class _NeumorphicRangeSliderState extends State<NeumorphicRangeSlider> {
               //because left = -1 & right = 1, so the "width" = 2, and minValue = 1
               (widget.percentLow * 2) - 1,
               0),
-          child: GestureDetector(
+          child: MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
               onHorizontalDragStart: (DragStartDetails details) {
                 _canChangeActiveThumb = true;
                 _activeThumb = ActiveThumb.low;
@@ -221,14 +223,18 @@ class _NeumorphicRangeSliderState extends State<NeumorphicRangeSlider> {
                   widget.onPanEnded(_activeThumb);
                 }
               },
-              child: _generateThumb(context, thumbSize, widget.style.variant)),
+              child: _generateThumb(context, thumbSize, widget.style.variant),
+            ),
+          ),
         ),
         Align(
           alignment: Alignment(
               //because left = -1 & right = 1, so the "width" = 2, and minValue = 1
               (widget.percentHigh * 2) - 1,
               0),
-          child: GestureDetector(
+          child: MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
               onHorizontalDragStart: (DragStartDetails details) {
                 _canChangeActiveThumb = true;
                 _activeThumb = ActiveThumb.high;
@@ -244,7 +250,9 @@ class _NeumorphicRangeSliderState extends State<NeumorphicRangeSlider> {
                   widget.onPanEnded(_activeThumb);
                 }
               },
-              child: _generateThumb(context, thumbSize, widget.style.accent)),
+              child: _generateThumb(context, thumbSize, widget.style.accent),
+            ),
+          ),
         ),
       ],
     );

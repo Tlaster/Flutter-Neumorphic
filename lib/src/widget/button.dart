@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -179,38 +180,41 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
     final appBarPresent = NeumorphicAppBarTheme.of(context) != null;
     final appBarTheme = NeumorphicTheme.of(context).current.appBarTheme;
 
-    return GestureDetector(
-      onTapDown: (detail) {
-        hasTapUp = false;
-        if (clickable && !pressed) {
-          _handlePress();
-        }
-      },
-      onTapUp: (details) {
-        if (clickable) {
-          widget.onPressed();
-        }
-        hasTapUp = true;
-        _resetIfTapUp();
-      },
-      onTapCancel: () {
-        hasTapUp = true;
-        _resetIfTapUp();
-      },
-      child: AnimatedScale(
-        scale: _getScale(),
-        child: Neumorphic(
-          margin: widget.margin,
-          drawSurfaceAboveChild: widget.drawSurfaceAboveChild,
-          duration: widget.duration,
-          curve: widget.curve,
-          padding: widget.padding ??
-              (appBarPresent ? appBarTheme.buttonPadding : null) ??
-              const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-          style: initialStyle.copyWith(
-            depth: _getDepth(),
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTapDown: (detail) {
+          hasTapUp = false;
+          if (clickable && !pressed) {
+            _handlePress();
+          }
+        },
+        onTapUp: (details) {
+          if (clickable) {
+            widget.onPressed();
+          }
+          hasTapUp = true;
+          _resetIfTapUp();
+        },
+        onTapCancel: () {
+          hasTapUp = true;
+          _resetIfTapUp();
+        },
+        child: AnimatedScale(
+          scale: _getScale(),
+          child: Neumorphic(
+            margin: widget.margin,
+            drawSurfaceAboveChild: widget.drawSurfaceAboveChild,
+            duration: widget.duration,
+            curve: widget.curve,
+            padding: widget.padding ??
+                (appBarPresent ? appBarTheme.buttonPadding : null) ??
+                const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            style: initialStyle.copyWith(
+              depth: _getDepth(),
+            ),
+            child: widget.child,
           ),
-          child: widget.child,
         ),
       ),
     );
