@@ -212,23 +212,24 @@ class _NeumorphicRangeSliderState extends State<NeumorphicRangeSlider> {
           child: MouseRegion(
             cursor: SystemMouseCursors.click,
             child: GestureDetector(
-              onHorizontalDragStart: (DragStartDetails details) {
-                _canChangeActiveThumb = true;
-                _activeThumb = ActiveThumb.low;
-                if (widget.onPanStarted != null) {
-                  widget.onPanStarted(_activeThumb);
-                }
-              },
-              onHorizontalDragUpdate: (DragUpdateDetails details) {
-                panUpdate(details);
-              },
-              onHorizontalDragEnd: (details) {
-                if (widget.onPanEnded != null) {
-                  widget.onPanEnded(_activeThumb);
-                }
-              },
-              child: widget.thumb ??
-                  _generateThumb(context, thumbSize, widget.style.variant)),
+                onHorizontalDragStart: (DragStartDetails details) {
+                  _canChangeActiveThumb = true;
+                  _activeThumb = ActiveThumb.low;
+                  if (widget.onPanStarted != null) {
+                    widget.onPanStarted(_activeThumb);
+                  }
+                },
+                onHorizontalDragUpdate: (DragUpdateDetails details) {
+                  panUpdate(details);
+                },
+                onHorizontalDragEnd: (details) {
+                  if (widget.onPanEnded != null) {
+                    widget.onPanEnded(_activeThumb);
+                  }
+                },
+                child: widget.thumb ??
+                    _generateThumb(context, thumbSize, widget.style.variant)),
+          ),
         ),
         Align(
           alignment: Alignment(
@@ -238,23 +239,24 @@ class _NeumorphicRangeSliderState extends State<NeumorphicRangeSlider> {
           child: MouseRegion(
             cursor: SystemMouseCursors.click,
             child: GestureDetector(
-              onHorizontalDragStart: (DragStartDetails details) {
-                _canChangeActiveThumb = true;
-                _activeThumb = ActiveThumb.high;
-                if (widget.onPanStarted != null) {
-                  widget.onPanStarted(_activeThumb);
-                }
-              },
-              onHorizontalDragUpdate: (DragUpdateDetails details) {
-                panUpdate(details);
-              },
-              onHorizontalDragEnd: (details) {
-                if (widget.onPanEnded != null) {
-                  widget.onPanEnded(_activeThumb);
-                }
-              },
-              child: widget.thumb ??
-                  _generateThumb(context, thumbSize, widget.style.accent)),
+                onHorizontalDragStart: (DragStartDetails details) {
+                  _canChangeActiveThumb = true;
+                  _activeThumb = ActiveThumb.high;
+                  if (widget.onPanStarted != null) {
+                    widget.onPanStarted(_activeThumb);
+                  }
+                },
+                onHorizontalDragUpdate: (DragUpdateDetails details) {
+                  panUpdate(details);
+                },
+                onHorizontalDragEnd: (details) {
+                  if (widget.onPanEnded != null) {
+                    widget.onPanEnded(_activeThumb);
+                  }
+                },
+                child: widget.thumb ??
+                    _generateThumb(context, thumbSize, widget.style.accent)),
+          ),
         ),
       ],
     );
