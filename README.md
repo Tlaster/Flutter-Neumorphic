@@ -19,7 +19,7 @@ https://pub.dartlang.org/packages/flutter_neumorphic)
 
 ```dart
 dependencies:
-  flutter_neumorphic: ^3.0.1
+  flutter_neumorphic: ^3.0.3
 
 //requires flutter > 1.13.18
 ```
@@ -136,7 +136,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 Neumorphic(
   style: NeumorphicStyle(
     shape: NeumorphicShape.concave,
-    boxShape: NeumorphicBoxShape.roundRect(borderRadius: BorderRadius.circular(12)), 
+    boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)), 
     depth: 8,
     lightSource: LightSource.topLeft,
     color: Colors.grey

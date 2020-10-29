@@ -114,6 +114,7 @@ class NeumorphicSlider extends StatefulWidget {
   final NeumorphicSliderListener onChangeEnd;
 
   final Widget thumb;
+  final double sliderHeight;
 
   NeumorphicSlider({
     Key key,
@@ -126,6 +127,7 @@ class NeumorphicSlider extends StatefulWidget {
     this.onChangeStart,
     this.onChangeEnd,
     this.thumb,
+    this.sliderHeight,
   });
 
   double get percent => (((value.clamp(min, max)) - min) / ((max - min)));
@@ -183,7 +185,7 @@ class _NeumorphicSliderState extends State<NeumorphicSlider> {
                 //because left = -1 & right = 1, so the "width" = 2, and minValue = 1
                 (widget.percent * 2) - 1,
                 0),
-            child: _generateThumb(context, thumbSize))
+            child: widget.thumb ?? _generateThumb(context, thumbSize))
       ],
     );
   }

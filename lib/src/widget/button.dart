@@ -93,7 +93,7 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
   void updateInitialStyle() {
     final appBarPresent = NeumorphicAppBarTheme.of(context) != null;
     if (widget.style != initialStyle || initialStyle == null) {
-      final theme = NeumorphicTheme.of(context).current;
+      final theme = NeumorphicTheme.currentTheme(context);
       setState(() {
         this.initialStyle = widget.style ??
             (appBarPresent
@@ -178,7 +178,7 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
 
   Widget _build(BuildContext context) {
     final appBarPresent = NeumorphicAppBarTheme.of(context) != null;
-    final appBarTheme = NeumorphicTheme.of(context).current.appBarTheme;
+    final appBarTheme = NeumorphicTheme.currentTheme(context).appBarTheme;
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,

@@ -22,6 +22,19 @@ class NeumorphicApp extends StatelessWidget {
   final List<NavigatorObserver> navigatorObservers;
   final InitialRouteListFactory onGenerateInitialRoutes;
   final bool debugShowCheckedModeBanner;
+  final Function(BuildContext, Widget) builder;
+  final Function(Locale, Iterable<Locale>) localeResolutionCallback;
+  final ThemeData highContrastTheme;
+  final ThemeData highContrastDarkTheme;
+  final LocaleListResolutionCallback localeListResolutionCallback;
+  final bool showPerformanceOverlay;
+  final bool checkerboardRasterCacheImages;
+  final bool checkerboardOffscreenLayers;
+  final bool showSemanticsDebugger;
+  final Map<LogicalKeySet, Intent> shortcuts;
+  final Map<Type, Action<Intent>> actions;
+
+  final bool debugShowMaterialGrid;
 
   const NeumorphicApp({
     Key key,
@@ -45,6 +58,18 @@ class NeumorphicApp extends StatelessWidget {
     this.themeMode = ThemeMode.system,
     this.materialDarkTheme,
     this.materialTheme,
+    this.builder,
+    this.localeResolutionCallback,
+    this.highContrastTheme,
+    this.highContrastDarkTheme,
+    this.localeListResolutionCallback,
+    this.showPerformanceOverlay = false,
+    this.checkerboardRasterCacheImages = false,
+    this.checkerboardOffscreenLayers = false,
+    this.showSemanticsDebugger = false,
+    this.debugShowMaterialGrid = false,
+    this.shortcuts,
+    this.actions,
   }) : super(key: key);
 
   ThemeData _getMaterialTheme(NeumorphicThemeData theme) {
@@ -88,25 +113,36 @@ class NeumorphicApp extends StatelessWidget {
         builder: (context) => IconTheme(
           data: NeumorphicTheme.currentTheme(context).iconTheme,
           child: MaterialApp(
-            title: title,
-            color: color,
-            theme: materialTheme,
-            darkTheme: materialDarkTheme,
-            initialRoute: initialRoute,
-            routes: routes,
-            themeMode: themeMode,
-            localizationsDelegates: localizationsDelegates,
-            supportedLocales: supportedLocales,
-            locale: locale,
-            home: home,
-            onGenerateRoute: onGenerateRoute,
-            onUnknownRoute: onUnknownRoute,
-            onGenerateTitle: onGenerateTitle,
-            onGenerateInitialRoutes: onGenerateInitialRoutes,
-            navigatorKey: navigatorKey,
-            navigatorObservers: navigatorObservers,
-            debugShowCheckedModeBanner: debugShowCheckedModeBanner,
-          ),
+              title: title,
+              color: color,
+              theme: materialTheme,
+              darkTheme: materialDarkTheme,
+              initialRoute: initialRoute,
+              routes: routes,
+              themeMode: themeMode,
+              localizationsDelegates: localizationsDelegates,
+              supportedLocales: supportedLocales,
+              locale: locale,
+              home: home,
+              onGenerateRoute: onGenerateRoute,
+              onUnknownRoute: onUnknownRoute,
+              onGenerateTitle: onGenerateTitle,
+              onGenerateInitialRoutes: onGenerateInitialRoutes,
+              navigatorKey: navigatorKey,
+              navigatorObservers: navigatorObservers,
+              debugShowCheckedModeBanner: debugShowCheckedModeBanner,
+              builder: builder,
+              localeResolutionCallback: localeResolutionCallback,
+              highContrastTheme: highContrastTheme,
+              highContrastDarkTheme: highContrastDarkTheme,
+              localeListResolutionCallback: localeListResolutionCallback,
+              showPerformanceOverlay: showPerformanceOverlay,
+              checkerboardRasterCacheImages: checkerboardRasterCacheImages,
+              checkerboardOffscreenLayers: checkerboardOffscreenLayers,
+              showSemanticsDebugger: showSemanticsDebugger,
+              shortcuts: shortcuts,
+              actions: actions,
+              debugShowMaterialGrid: debugShowMaterialGrid),
         ),
       ),
     );

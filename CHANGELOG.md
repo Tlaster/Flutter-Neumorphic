@@ -1,3 +1,12 @@
+## 3.0.3
+
+* Fixed issue on button / theme
+* Improved NeumorphicApp
+
+## 3.0.2
+
+* Fixed issue on NeumorphicButton + Theme
+
 ## 3.0.1
 
 * Added customization of icons in NeumorphicAppBar
